@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %} Главная {%  endblock title %}
+
+
+{% block content %}
+
+<center>
+
+    {% for product in products %}
+    <a class="nav-link" href="{% url 'main:post' product.pk %}">{{product.name}}</a>
+
+    {{ product.description }}
+
+
+
+    {% if product.photo %}
+         <p><img class="img" src="{{product.photo.url}}"></p>
+    {% endif %}
+
+        <p class="price">${{ product.price }}</p>
+<form action="{% url 'cart:cart_add' product.id %}" method="post">
+    {{ cart_product_form }}
+    {% csrf_token %}
+    <input type="submit" value="Добавить в корзину">
+
+</form>
+
+<hr>
+    {% endfor %}
+
+</center>
+
+
+{% endblock %}

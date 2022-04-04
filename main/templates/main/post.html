@@ -1,0 +1,34 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %} Категории {%  endblock title %}
+
+
+
+{% block content %}
+
+
+<center>
+
+    {{products.name}}
+    <p> {{products.description}}</p>
+
+
+     {% if products.photo %}
+         <p><img class="img" src="{{products.photo.url}}"></p>
+    {% endif %}
+
+            <p class="price">${{ products.price }}</p>
+<form action="{% url 'cart:cart_add' products.id %}" method="post">
+    {{ cart_product_form }}
+    {% csrf_token %}
+    <input type="submit" value="Add to cart">
+
+</form>
+
+
+</center>
+
+
+
+{% endblock %}

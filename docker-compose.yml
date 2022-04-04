@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  dm_db:
+    image: nouchka/sqlite3
+    volumes:
+      - db.sqlite3:/online_store/online_shop/db.sqlite3
+  web:
+      build: .
+      command: python3  /online_store/online_shop/manage.py runserver 0.0.0.0:8000
+      volumes:
+        - .:/online_store/online_shop/
+      ports:
+           - 8000:8000
+      depends_on:
+        - dm_db
+volumes:
+  db.sqlite3:

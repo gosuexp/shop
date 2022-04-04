@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+
+
+{% block content %}
+
+{% if post %}
+    <center><h1>Результаты найдены</h1></center>
+    <br>
+
+{% for i in post %}
+    <center>
+    {% if i.photo %}
+         <p><img class="img" src="{{i.photo.url}}"></p>
+    {% endif %}
+    </center>
+
+<center><h2><a href="/post/{{ i.id }}">{{ i.name }}</a></h2></center>
+{% endfor %}
+    {% else %}
+
+<center><h2><a href="/">Ничего не найдено</a></h2></center>
+{% endif %}
+  </br>
+
+{% endblock  %}
